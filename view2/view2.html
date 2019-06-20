@@ -1,5 +1,21 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div ng-controller="View2Ctrl">
+  <section class="pt-5 mt-5 page-title" id="page-title">
+    <div class="container">
+      <h1 class="colour-2">
+        Line Up
+      </h1>
+    </div>
+  </section>
+  <section class="page-content bg-white p-4">
+    <div class="container">
+      <div class="row">
+        <div class="poster col-md-12">
+          <img src="/app/media/img/BoilerRoomPoster.png" />
+        </div>
+        <div class="col-sm-12 mt-4">
+          <span>Click <a href="#!/artistinfo">here </a> to learn more about the artists.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

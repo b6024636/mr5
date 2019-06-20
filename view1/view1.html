@@ -1,20 +1,75 @@
-<div class="header">
-    <div class="d-flex justify-content-center">
-        <img src="media/img/marcsroom5white.png"/>
+<div ng-controller="View1Ctrl">
+    <div class="header wrapper">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+                <img class="main-image m-auto" src="media/img/logo/marcsroom5white.png"/>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8" data-aos="fade-right" data-aos-anchor-placement="bottom-top">
-            <div class="bg-white content-card p-4">
-                <p>It's that time of year.</p>
+    <section class="p-lg-4 bg-white">
+        <div class="container-fluid">
+            <div class="row p-5 d-flex justify-content-center flex-column">
+                <div class="" data-aos="fade-right" data-aos-anchor-placement="bottom-top">
+                    <div class="pt-3">
+                        <p class="h3 colour-3 text-center">It's that time of year.</p>
+                    </div>
+                </div>
+                <div class="home-btn text-center">
+                    <a class="btn colour-3" href="#!/lineup"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></a>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="img-holder-4">
-                <img src="media/img/dj-remixes.jpg"/>
-            </div>
-        </div>
-    </div>
+    </section>
+
+    <script>
+        // for (var i = 0; i < 250; i++) {
+        //     create(i);
+        // }
+
+        function create(i) {
+            var width = Math.random() * 8;
+            var height = width * 0.4;
+            var colourIdx = Math.ceil(Math.random() * 3);
+            var colour = "red";
+            switch(colourIdx) {
+                case 1:
+                    colour = "yellow";
+                    break;
+                case 2:
+                    colour = "blue";
+                    break;
+                default:
+                    colour = "red";
+            }
+            $('<div class="confetti confetti-'+i+' '+colour+'"></div>').css({
+                "width" : width+"px",
+                "height" : height+"px",
+                "top" : -Math.random()*20+"%",
+                "left" : Math.random()*100+"%",
+                "opacity" : Math.random()+0.5,
+                "transform" : "rotate("+Math.random()*360+"deg)"
+            }).appendTo('.wrapper');
+
+            drop(i);
+        }
+
+        function drop(x) {
+            $('.confetti-'+x).animate({
+                top: "100%",
+                left: "+="+Math.random()*15+"%"
+            }, Math.random()*3000 + 3000, function() {
+                reset(x);
+            });
+        }
+
+        function reset(x) {
+            $('.confetti-'+x).animate({
+                "top" : -Math.random()*20+"%",
+                "left" : "-="+Math.random()*15+"%"
+            }, 0, function() {
+                drop(x);
+            });
+        }
+    </script>
 </div>

@@ -1,0 +1,39 @@
+<div ng-controller="ArtistInfoCtrl">
+    <section class="pt-5 mt-5 page-title" id="page-title">
+        <div class="container">
+            <h1 class="colour-2">
+                Artist Info
+            </h1>
+        </div>
+    </section>
+    <section class="page-content bg-white p-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="form-group row" style="margin-left: 0px;">
+                        <label class="col-md-2 col-sm-6 col-form-label">Search Artists: <input class="form-control" type="text" ng-model="search" placeholder="Search.."/></label>
+                    </form>
+                </div>
+                <div class="artist-list col-sm-12">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-12 mb-2" ng-repeat="artist in lads | filter:search">
+                            <div class="artist-profile" style="background-image: url('/app/media/img/artist-pics/{{artist[1].img}}')" ng-click="artistModal(artist[0])">
+                                <div class="artist-title">
+                                    <span>{{artist[0][0].toUpperCase() + artist[0].substr(1).toLowerCase()}}</span>
+                                </div>
+                                <div class="artist-link">
+                                    <span>Read More &raquo;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(document).ready(function(){
+            $(this).scrollTop(0);
+        });
+    </script>
+</div>
