@@ -1,4 +1,4 @@
-<div ng-controller="View1Ctrl">
+<div ng-controller="View1Ctrl" style="background-color: #6c757d">
     <div class="header wrapper">
         <div class="col-md-12">
             <div class="d-flex justify-content-center">
@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <section class="p-lg-4 bg-white">
+    <section class="p-lg-4 bg-white home-bar">
         <div class="container-fluid">
             <div class="row p-5 d-flex justify-content-center flex-column">
                 <div class="" data-aos="fade-right" data-aos-anchor-placement="bottom-top">
@@ -23,53 +23,60 @@
     </section>
 
     <script>
-        // for (var i = 0; i < 250; i++) {
-        //     create(i);
-        // }
+        $(document).ready(function(){
+            $(this).scrollTop(0);
+        });
+        $('.header').css('top', $('.navbar').height() + 'px');
 
-        function create(i) {
-            var width = Math.random() * 8;
-            var height = width * 0.4;
-            var colourIdx = Math.ceil(Math.random() * 3);
-            var colour = "red";
-            switch(colourIdx) {
-                case 1:
-                    colour = "yellow";
-                    break;
-                case 2:
-                    colour = "blue";
-                    break;
-                default:
-                    colour = "red";
+        if(!images)
+            var images = [
+                    '2eSO.gif',
+                    'giphy.gif',
+                    'spiral.gif',
+                    'room.gif'
+                ];
+        let url = window.location,
+            mediaUrl = url .protocol + "//" + url.host + "/" + url.pathname.split('/')[0] + 'app/media/img/homebanner/';
+        let selectedImage = Math.floor((Math.random() * images.length));
+        $('.header').css('background-image', 'url(media/img/homebanner/'+images[selectedImage]+')');
+        if(selectedImage == 2){
+            $('.header').css({
+                'background-position' : 'center',
+                'background-size': 'cover'
+            });
+        }
+        let usedImages = [];
+        function changeImage(){
+            let currentImage = $('.header').css('background-image');
+            currentImage = currentImage.replace('url(','').replace(')','').replace(/\"/gi, "");
+            let selectedImage = Math.floor((Math.random() * images.length));
+            if(mediaUrl + images[selectedImage] == currentImage) {
+                changeImage();
+            }else{
+                $('.header').css('background-image', 'url(media/img/homebanner/static.gif)');
+                if(selectedImage == 2){
+                    $('.header').css({
+                        'background-position' : 'center',
+                        'background-size': 'cover'
+                    });
+                }else if(selectedImage == 3 && window.width < 600){
+                    $('.header').css({
+                        'background-position' : 'center',
+                        'background-size': 'unset'
+                    });
+                }else{
+                    $('.header').css({
+                        'background-position' : 'unset',
+                        'background-size': 'unset'
+                    });
+                }
+                setTimeout(function(){
+                    $('.header').css('background-image', 'url(media/img/homebanner/'+images[selectedImage]+')');
+                }, 1000);
             }
-            $('<div class="confetti confetti-'+i+' '+colour+'"></div>').css({
-                "width" : width+"px",
-                "height" : height+"px",
-                "top" : -Math.random()*20+"%",
-                "left" : Math.random()*100+"%",
-                "opacity" : Math.random()+0.5,
-                "transform" : "rotate("+Math.random()*360+"deg)"
-            }).appendTo('.wrapper');
-
-            drop(i);
         }
-
-        function drop(x) {
-            $('.confetti-'+x).animate({
-                top: "100%",
-                left: "+="+Math.random()*15+"%"
-            }, Math.random()*3000 + 3000, function() {
-                reset(x);
-            });
-        }
-
-        function reset(x) {
-            $('.confetti-'+x).animate({
-                "top" : -Math.random()*20+"%",
-                "left" : "-="+Math.random()*15+"%"
-            }, 0, function() {
-                drop(x);
-            });
-        }
+        window.setInterval(function(){
+            changeImage();
+        },  4000);
     </script>
 </div>

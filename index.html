@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../node_modules/angular-popeye/release/popeye.css" />
+    <link rel="stylesheet" href="css/jqueryMobile/jquery.mobile-1.4.5.css"/>
+    <link rel="icon" href="/app/media/img/logo/marcsroom.png">
     <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <title>Marcs Room</title>
 </head>
@@ -24,6 +27,7 @@
 <nav class="navbar fixed-top navbar-dark bg-dark nav-bar navbar-expand-md navbar-toggleable-sm">
     <div class="container">
         <a class="navbar-brand logo" href="#"><img src="media/img/logo/marcsroom5white.png" alt="logo"/></a>
+        <div class="nav-bar-title"></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,6 +35,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="#!/home" data-toggle="collapse" data-target="#navbarNav">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#!/lineup" data-toggle="collapse" data-target="#navbarNav">Line Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!/tickets" data-toggle="collapse" data-target="#navbarNav">Tickets</a></li>
             </ul>
         </div>
     </div>
@@ -49,10 +54,10 @@
                 <span class="footer-header colour-5 underline">Info</span>
                 <ul>
                     <li class="footer-list">
-                        <a href="#" class="footer-links colour-4"><span>About</span></a>
+                        <a href="#!/about" class="footer-links colour-4"><span>About</span></a>
                     </li>
                     <li class="footer-list">
-                        <a href="#" class="footer-links colour-4"><span>How to find us?</span></a>
+                        <a href="#!/howtofind" class="footer-links colour-4"><span>How to find us?</span></a>
                     </li>
                     <li class="footer-list">
                         <a href="#" class="footer-links colour-4"><span>FAQ</span></a>
@@ -69,7 +74,7 @@
                         <a href="#!/artistinfo" class="footer-links colour-4"><span>Artist Info</span></a>
                     </li>
                     <li class="footer-list">
-                        <a href="#" class="footer-links colour-4"><span>Tickets</span></a>
+                        <a href="#!/tickets" class="footer-links colour-4"><span>Tickets</span></a>
                     </li>
                 </ul>
             </div>
@@ -88,11 +93,19 @@
 <script src="view1/view1.js"></script>
 <script src="view2/view2.js"></script>
 <script src="artistinfo/artistinfo.js"></script>
+<script src="howtofind/howtofind.js"></script>
+<script src="about/about.js"></script>
+<script src="tickets/tickets.js"></script>
 <script src="core/version/version.js"></script>
 <script src="core/version/version-directive.js"></script>
 <script src="core/version/interpolate-filter.js"></script>
 <script src="js/confetti.js.old"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="../node_modules/angular-popeye/release/popeye.js"></script>
+<script src="//code.angularjs.org/1.2.2/angular-animate.min.js"></script>
+<!-- jQuery mobile not supported for jQuery 3+-->
+<!--<script src="js/jquery.mobile-1.4.5.js"></script>-->
+<!--<script src="js/jquery.mobile-1.4.5.min.js"></script>-->
 <script>
     AOS.init({
         disable: false,
@@ -107,11 +120,21 @@
 <script>
     var $bannerHeight = $('.navbar').height();
     $(document).on('scroll', function() {
-        let $height = $(window).scrollTop() ;
-        if($height>=$('#page-title').offset().top){
-            if($('.nav-bar .nav-heading').length < 1)
-                $('.nav-bar .navbar-brand').after('<h4 class="nav-heading">' + $('#page-title h1').text() + '</h4>');
-        }else{
+        if($('#page-title').length > 0) {
+            let $height = $(window).scrollTop();
+            if ($height >= $('#page-title').offset().top) {
+                if ($('.nav-bar .nav-heading').length < 1) {
+                    $('.nav-bar .nav-bar-title').append('<h4 class="nav-heading">' + $('#page-title h1').text() + '</h4>');
+                } else if ($('#page-title h1').text() != $('.nav-heading').text()) {
+                    $('.nav-bar .nav-heading').remove();
+                    $('.nav-bar .nav-bar-title').append('<h4 class="nav-heading">' + $('#page-title h1').text() + '</h4>');
+                }
+                $('.nav-bar-title').css('opacity', '1');
+            } else {
+                $('.nav-bar-title').css('opacity', '0');
+
+            }
+        }else {
             $('.nav-bar .nav-heading').remove();
         }
     })
