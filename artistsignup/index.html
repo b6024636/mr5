@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Signup</title>
+    <script src="/app/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/app/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link rel="stylesheet" href="/app/css/bootstrap.css">
+    <link rel="icon" href="/app/media/img/logo/marcsroom.png">
+</head>
+<body>
+    <h1>Enter your profile:</h1>
+    <form action="signup.php" method="post">
+        <label>Stage Name:</label><br/>
+        <input type="text" name="name" class="form-name" required/><br/>
+        <label>Password:</label><br/>
+        <input type="password" name="password" class="form-password" required/>
+        <input type="submit" />
+    </form>
+
+    <script>
+        var $ = jQuery;
+        // $(document).ready(function(){
+        //     if(getCookie('artist_data'))
+        //         window.location.href="artistProfile.php";
+        // });
+        var $form = $('form');
+        $form.submit(function( e ){
+            console.log('test');
+            e.preventDefault();
+            // if($form.validate) {
+                var $data = $form.serialize();
+                var name = $('.form-name').val();
+                var password = $('.form-password').val();
+                var data = 'name=' + name + '&password=' + password;
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: data,
+                    success: function (_data) {
+                        console.log(_data);
+                        if (_data.success) {
+                            // if (getCookie("artist_data") == "")
+                                setCookie("artist_data", JSON.stringify(_data), 10);
+                            window.location.href = "artistProfile.php";
+                        }
+                    }
+                });
+            // }
+        });
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(";");
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == " ") {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    </script>
+</body>
+</html>

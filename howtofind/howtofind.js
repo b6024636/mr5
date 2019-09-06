@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.artistinfo', ['ngRoute'])
+angular.module('myApp.howtofind', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/artistinfo', {
-            templateUrl: 'artistinfo/artistinfo.html',
-            controller: 'ArtistInfoCtrl'
+        $routeProvider.when('/howtofind', {
+            templateUrl: 'howtofind/howtofind.html',
+            controller: 'HowToFindCtrl'
         });
     }])
 
-    .controller('ArtistInfoCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('HowToFindCtrl', ['$scope', '$http', function($scope, $http) {
 
         $scope.lads = "";
         $http.get('http://inspectionssdev.kinspeed.com/app/lib/constants/artists.json')
@@ -32,7 +32,7 @@ angular.module('myApp.artistinfo', ['ngRoute'])
 
             // var modalPop = Popeye.openModal({
             //     template: $scope.modalTemplate(artist),
-            //     controller: "ArtistInfoCtrl as ctrl"
+            //     controller: "HowToFindCtrl as ctrl"
             //
             // });
 
@@ -41,12 +41,7 @@ angular.module('myApp.artistinfo', ['ngRoute'])
                 elem.append($scope.modalTemplate(artist));
         };
 
-        $scope.loadBookings = function () {
-          $http.get("http://webteach_net.hallam.shu.ac.uk/acesjas/api/booking")
-              .success(function(response) {
-                    console.log('test the ' + response);
-              });
-        };
+
         $scope.modalTemplate = function(artist)
         {
             $scope.html = '' +

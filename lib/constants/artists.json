@@ -1,0 +1,25 @@
+{
+  "bolero" : {
+    "name": "bolero",
+    "img": "bolero.jpg",
+    "description": "Hi I'm dan :)"
+  },
+  "tamot" : {
+    "name": "tamot",
+    "img": "tamot.jpg",
+    "description": "Hi I'm graham :)"
+  },
+  "rekrow" : {
+    "name": "rekrow",
+    "img": "rekrow.jpg",
+    "description": "Hi I'm richie :)"
+  },
+  "andyroid":{
+    "name": "andyroid",
+    "img": "andyroid.jpg",
+    "desciption": "Hi I'm ben :)"
+  },
+  "test":{
+    "name": "aaaaaaaaaaaaaaaa"
+  }
+}

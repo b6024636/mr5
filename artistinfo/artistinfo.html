@@ -16,8 +16,8 @@
                 </div>
                 <div class="artist-list col-sm-12">
                     <div class="row">
-                        <div class="col-md-4 col-sm-6 col-xs-12 mb-2" ng-repeat="artist in lads | filter:search">
-                            <div class="artist-profile" style="background-image: url('/app/media/img/artist-pics/{{artist[1].img}}')" ng-click="artistModal(artist[0])">
+                        <div class="col-md-4 col-sm-6 col-xs-12 mb-2" ng-repeat="artist in lads | filter:search | orderBy:artist[0][0]">
+                            <div class="artist-profile" style="background-image: url('/app/media/img/artist-pics/{{artist[1].img}}')" ng-click="artistModal(artist[0])" id="{{artist[0]}}">
                                 <div class="artist-title">
                                     <span>{{artist[0][0].toUpperCase() + artist[0].substr(1).toLowerCase()}}</span>
                                 </div>

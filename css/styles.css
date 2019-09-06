@@ -4,12 +4,18 @@
 body{
     overflow-x: hidden;
 }
+.transparent{
+    opacity: 0!important;
+}
 .logo img{
     height: 60px;
     width: auto;
 }
 .nav-bar{
     padding: 4px 20px;
+}
+.width-100{
+    width: 100%;
 }
 .content-card{
     border-radius: 6px;
@@ -18,9 +24,22 @@ body{
     box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.35);
 }
 .header{
-    padding-top: 82px;
+    padding-top: 40px;
     width: 100%;
     height: 68vh;
+    background-size: cover;
+    position: relative;
+}
+.header::after {
+    height: 23%;
+    width: 100%;
+    z-index: 9999;
+    display: block;
+    content: '';
+    background: -moz-linear-gradient(top, rgba(108,117,125,0) 0%, rgba(108,117,125,1) 40%, rgba(108,117,125,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(108,117,125,0) 0%,rgba(108,117,125,1) 40%,rgba(108,117,125,1) 100%);
+    background: linear-gradient(to bottom, rgba(108,117,125,0) 0%,rgba(108,117,125,1) 70%,rgba(108,117,125,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006c757d', endColorstr='#6c757d',GradientType=0 );
 }
 .footer{
     height: 200px;
@@ -76,6 +95,7 @@ body{
 .confetti{
     position: absolute;
 }
+/** The color pallet **/
 .colour-1{
     color: #343A40!important;
 }
@@ -90,11 +110,6 @@ body{
 }
 .colour-5{
     color: #A9BCD0!important;
-}
-@media (max-width: 500px) {
-    .nav-link::after{
-        display: none;
-    }
 }
 .home-btn .fa-chevron-right::before{
     position: relative;
@@ -145,7 +160,7 @@ body{
 }
 .artist-title{
     position: relative;
-    height: 300px;
+    height: 100%;
     width: 100%;
     text-align: center;
     background: #0000007a;
@@ -158,8 +173,8 @@ body{
 }
 .artist-profile:hover{
     /*transform: scale(1.02);*/
-    -webkit-box-shadow: 0px 0px 3px 6px rgba(0,0,0,0.17);
-    box-shadow: 0px 0px 3px 6px rgba(0,0,0,0.17);
+    -webkit-box-shadow: 0px 0px 22px 2px rgba(0,0,0,0.54);
+    box-shadow: 0px 0px 22px 2px rgba(0,0,0,0.54);
 }
 .artist-profile:hover .artist-title span{
     top: 5%;
@@ -175,6 +190,7 @@ body{
     margin: auto;
     text-align: center;
 }
+
 .artist-profile:hover .artist-link {
     opacity: 1;
     top: -26%;
@@ -193,11 +209,11 @@ a{
     top: 10%;
     width: 80%;
     height: 70%;
-    left: 10%;
+    left: -100%;
     -webkit-box-shadow: 0px 0px 0px 2000px rgba(0,0,0,0.55);
     box-shadow: 0px 0px 0px 2000px rgba(0,0,0,0.55);
     overflow-y: auto;
-    transition: ease-in-out 500ms;
+    transition: ease-in-out 250ms;
 }
 .modal-heading{
     padding: 14px;
@@ -243,23 +259,68 @@ a{
     margin-right: 30px;
     text-decoration: underline;
 }
-
 @media (min-width: 700px){
     .modal-description{
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
     }
-    .modal-image{
+    .modal-image {
         flex-basis: 30%;
     }
+    .header::after{
+        height: 45%;
+    }
 }
-@media (max-width: 500px){
+@media (max-width: 325px){
+    .artist-profile, .artist-title {
+        height: 242px;
+    }
+    .main-image{
+        width:auto;
+        height: 290px;
+    }
+    .home-bar{
+        top: 10px;
+    }
+}
+.poster img{
+    width: 100%;
+}
+.col-sm-5{
+    width: 40%;
+}
+.nav-bar-title{
+    opacity: 0;
+    transition: ease-in-out 350ms;
+}
+.poster img{
+    transition: ease-in-out 1000ms;
+}
+.poster-text span{
+    transition: ease-in-out 1000ms;
+}
+.home-bar{
+    -webkit-box-shadow: 0px 0px 80px 15px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 80px 15px rgba(0,0,0,1);
+    box-shadow: 0px 0px 80px 15px rgba(0,0,0,1);
+    position: relative;
+    top: -20px;
+    width: 90%;
+    margin: auto;
+}
+@media (max-width: 500px) {
+    .nav-link::after{
+        display: none;
+    }
+    .header::after {
+        height: 26%;
+    }
     .modal{
         height: 87%;
         width: 85%;
         top: 8%;
-        left: 8%;
+        left: -100%;
     }
     .modal-heading{
         padding: 8px 8px 3px;
@@ -276,22 +337,7 @@ a{
     .navbar .nav-heading{
         text-decoration: none;
     }
-}
-@media (max-width: 325px){
-    .artist-profile, .artist-title {
-        height: 242px;
+    .nav-item{
+        border-top: 1px solid #A9BCD0;
     }
-    .main-image{
-        width:auto;
-        height: 290px;
-    }
-}
-.poster img{
-    width: 100%;
-}
-.col-sm-5{
-    width: 40%;
-}
-.show .nav-item{
-    border-top: 1px solid #A9BCD0;
 }
